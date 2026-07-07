@@ -130,7 +130,7 @@
 <div class="hero">
   <div class="wordmark">Best Interest Financial</div>
   <h1>Refer a client to Best Interest</h1>
-  <p>We're the in-house mortgage team at Clever — the same company behind your referrals. Send us your client and they get a dedicated loan officer with a direct line, and you stay in the loop the whole way.</p>
+  <p>We're Clever's in-house mortgage team. Your client gets a dedicated loan officer and a direct line — and you'll always know exactly where things stand.</p>
   <div class="badge">Clever Agent Partner Referral</div>
 </div>
 
@@ -209,14 +209,18 @@
           <label for="loan_officer">Already working with someone on our team? Pick them — otherwise we'll route your client to the next available loan officer.</label>
           <select id="loan_officer" name="loan_officer">
             <option value="">No preference — route for me</option>
-            <option>Corey Hansen</option>
-            <option>Josh Bradley</option>
-            <option>Charlie Wilson</option>
-            <option>Matthew Oetting</option>
-            <option>Jacob Barch</option>
-            <option>Sean Manning</option>
-            <option>Luke Wheldon</option>
+            <option>Bernie Frascarelli</option>
+            <option>John Donikian</option>
+            <option>Chris Kuclo</option>
             <option>Noah Borders</option>
+            <option>Connor Farida</option>
+            <option>Jacquelyn Dew</option>
+            <option>Sean Manning</option>
+            <option>Alex Kruso</option>
+            <option>Joseph Hutchings</option>
+            <option>Jacob Barch</option>
+            <option>Charlie Wilson</option>
+            <option>Matt Oetting</option>
           </select>
         </div>
       </div>
@@ -260,17 +264,11 @@
 <script>
   // ── CONFIG ──────────────────────────────────────────────────────────────
   // Paste the Zapier "Catch Hook" URL here before publishing.
-  const WEBHOOK_URL = "PASTE_ZAPIER_CATCH_HOOK_URL_HERE";
+  const WEBHOOK_URL = "https://hooks.zapier.com/hooks/catch/17620986/4um0ko6/";
   // ────────────────────────────────────────────────────────────────────────
 
-  const STATES = ["Alabama","Alaska","Arizona","Arkansas","California","Colorado",
-    "Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana",
-    "Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan",
-    "Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire",
-    "New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma",
-    "Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee",
-    "Texas","Utah","Vermont","Virginia","Washington","Washington D.C.","West Virginia",
-    "Wisconsin","Wyoming"];
+  const STATES = ["Colorado","Florida","Georgia","Michigan","Minnesota","Ohio",
+    "Pennsylvania","South Carolina","Texas"];
   const stateSel = document.getElementById("state");
   STATES.forEach(s => {
     const o = document.createElement("option");
