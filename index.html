@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Refer a Client — Best Interest Financial</title>
+<style>
+  :root{
+    --navy:#0f1b3d;
+    --navy-2:#1c2c5b;
+    --accent:#e6a86b;
+    --accent-d:#d8954f;
+    --bg:#f4f6fa;
+    --card:#ffffff;
+    --ink:#1b2333;
+    --muted:#5b6478;
+    --line:#e7eaf0;
+    --err:#c94f4f;
+    --ok:#2f9e6e;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .hero{
+    background:linear-gradient(160deg,var(--navy) 0%,var(--navy-2) 100%);
+    color:#fff;padding:44px 20px 96px;text-align:center;
+  }
+  .wordmark{
+    font-size:13px;letter-spacing:.24em;text-transform:uppercase;
+    color:var(--accent);font-weight:700;margin-bottom:14px;
+  }
+  .hero h1{font-size:clamp(26px,4.5vw,36px);font-weight:800;letter-spacing:-.01em}
+  .hero p{
+    max-width:560px;margin:12px auto 0;color:#c6cde0;font-size:15.5px;
+  }
+  .badge{
+    display:inline-block;margin-top:18px;padding:6px 14px;border-radius:999px;
+    background:rgba(230,168,107,.14);border:1px solid rgba(230,168,107,.45);
+    color:var(--accent);font-size:12.5px;font-weight:600;letter-spacing:.04em;
+  }
+  .shell{max-width:640px;margin:-56px auto 60px;padding:0 16px}
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:16px;
+    box-shadow:0 10px 34px rgba(15,27,61,.10);padding:30px 28px;
+  }
+  @media(max-width:520px){.card{padding:24px 18px}}
+  .section{margin-bottom:26px}
+  .section:last-of-type{margin-bottom:8px}
+  .sec-label{
+    display:flex;align-items:center;gap:10px;margin-bottom:14px;
+  }
+  .sec-num{
+    width:24px;height:24px;border-radius:50%;background:var(--navy);color:#fff;
+    font-size:12.5px;font-weight:700;display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;
+  }
+  .sec-title{font-size:15px;font-weight:700;letter-spacing:.01em}
+  .sec-hint{font-size:12.5px;color:var(--muted);font-weight:400;margin-left:auto}
+  .row{display:flex;gap:12px}
+  .row .field{flex:1}
+  @media(max-width:520px){.row{flex-direction:column;gap:0}}
+  .field{margin-bottom:12px}
+  label{
+    display:block;font-size:12.5px;font-weight:600;color:var(--muted);
+    margin-bottom:5px;letter-spacing:.02em;
+  }
+  label .req{color:var(--accent-d)}
+  input,select,textarea{
+    width:100%;padding:11px 13px;border:1.5px solid var(--line);border-radius:10px;
+    font-size:15px;font-family:inherit;color:var(--ink);background:#fbfcfe;
+    transition:border-color .15s ease, background .15s ease;
+    appearance:none;-webkit-appearance:none;
+  }
+  select{
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235b6478' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 14px center;padding-right:36px;
+  }
+  input:focus,select:focus,textarea:focus{
+    outline:none;border-color:var(--navy-2);background:#fff;
+  }
+  input.error,select.error{border-color:var(--err)}
+  textarea{min-height:96px;resize:vertical}
+  .pills{display:flex;flex-wrap:wrap;gap:8px}
+  .pill{
+    padding:8px 15px;border-radius:999px;border:1.5px solid var(--line);
+    background:#fbfcfe;font-size:13.5px;font-weight:600;color:var(--muted);
+    cursor:pointer;transition:all .15s ease;user-select:none;
+  }
+  .pill:hover{border-color:var(--navy-2);color:var(--navy)}
+  .pill.on{background:var(--navy);border-color:var(--navy);color:#fff}
+  .err-msg{
+    display:none;margin:2px 0 10px;font-size:13px;color:var(--err);font-weight:600;
+  }
+  .err-msg.show{display:block}
+  .submit{
+    width:100%;margin-top:18px;padding:15px;border:none;border-radius:12px;
+    background:var(--accent);color:var(--navy);font-size:16px;font-weight:800;
+    letter-spacing:.02em;cursor:pointer;transition:background .15s ease, transform .1s ease;
+  }
+  .submit:hover{background:var(--accent-d)}
+  .submit:active{transform:scale(.99)}
+  .submit:disabled{opacity:.6;cursor:wait}
+  .fine{
+    text-align:center;font-size:12.5px;color:var(--muted);margin-top:14px;
+  }
+  /* success state */
+  .success{display:none;text-align:center;padding:34px 10px 20px}
+  .success.show{display:block}
+  .check{
+    width:64px;height:64px;border-radius:50%;background:var(--ok);color:#fff;
+    font-size:32px;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;
+  }
+  .success h2{font-size:22px;font-weight:800;margin-bottom:8px}
+  .success p{color:var(--muted);font-size:15px;max-width:420px;margin:0 auto}
+  .success .again{
+    display:inline-block;margin-top:22px;font-size:14px;font-weight:700;
+    color:var(--navy-2);cursor:pointer;text-decoration:underline;
+  }
+  footer{
+    text-align:center;padding:0 16px 44px;color:var(--muted);font-size:12.5px;
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="wordmark">Best Interest Financial</div>
+  <h1>Refer a client to Best Interest</h1>
+  <p>We're the in-house mortgage team at Clever — the same company behind your referrals. Send us your client and they get a dedicated loan officer with a direct line, and you stay in the loop the whole way.</p>
+  <div class="badge">Clever Agent Partner Referral</div>
+</div>
+
+<div class="shell">
+  <div class="card">
+
+    <form id="refForm" novalidate>
+
+      <div class="section">
+        <div class="sec-label">
+          <div class="sec-num">1</div>
+          <div class="sec-title">About you</div>
+        </div>
+        <div class="row">
+          <div class="field">
+            <label for="agent_name">Your name <span class="req">*</span></label>
+            <input id="agent_name" name="agent_name" type="text" autocomplete="name">
+          </div>
+          <div class="field">
+            <label for="agent_email">Your email <span class="req">*</span></label>
+            <input id="agent_email" name="agent_email" type="email" autocomplete="email">
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="sec-label">
+          <div class="sec-num">2</div>
+          <div class="sec-title">Your client</div>
+        </div>
+        <div class="field">
+          <label for="client_name">Client name <span class="req">*</span></label>
+          <input id="client_name" name="client_name" type="text">
+        </div>
+        <div class="row">
+          <div class="field">
+            <label for="client_phone">Client phone</label>
+            <input id="client_phone" name="client_phone" type="tel" inputmode="tel">
+          </div>
+          <div class="field">
+            <label for="client_email">Client email</label>
+            <input id="client_email" name="client_email" type="email">
+          </div>
+        </div>
+        <div class="err-msg" id="contactErr">Please include at least one way to reach the client — phone or email.</div>
+        <div class="field">
+          <label for="state">State they're buying in <span class="req">*</span></label>
+          <select id="state" name="state">
+            <option value="">Select a state…</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="sec-label">
+          <div class="sec-num">3</div>
+          <div class="sec-title">Where are they in the process?</div>
+          <div class="sec-hint">optional</div>
+        </div>
+        <div class="pills" id="stagePills">
+          <div class="pill" data-val="Just starting to look">Just starting to look</div>
+          <div class="pill" data-val="Actively touring homes">Actively touring homes</div>
+          <div class="pill" data-val="Ready to make an offer">Ready to make an offer</div>
+          <div class="pill" data-val="Under contract">Under contract</div>
+          <div class="pill" data-val="Needs a pre-approval">Needs a pre-approval</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="sec-label">
+          <div class="sec-num">4</div>
+          <div class="sec-title">Loan officer</div>
+          <div class="sec-hint">optional</div>
+        </div>
+        <div class="field">
+          <label for="loan_officer">Already working with someone on our team? Pick them — otherwise we'll route your client to the next available loan officer.</label>
+          <select id="loan_officer" name="loan_officer">
+            <option value="">No preference — route for me</option>
+            <option>Corey Hansen</option>
+            <option>Josh Bradley</option>
+            <option>Charlie Wilson</option>
+            <option>Matthew Oetting</option>
+            <option>Jacob Barch</option>
+            <option>Sean Manning</option>
+            <option>Luke Wheldon</option>
+            <option>Noah Borders</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="sec-label">
+          <div class="sec-num">5</div>
+          <div class="sec-title">Anything we should know?</div>
+          <div class="sec-hint">optional</div>
+        </div>
+        <div class="field">
+          <label for="notes">Timeline, budget, best time to call, anything that helps us take great care of them.</label>
+          <textarea id="notes" name="notes" placeholder="e.g., Pre-approved elsewhere but rate seems high. Prefers texts. Hoping to offer on a place this weekend."></textarea>
+        </div>
+      </div>
+
+      <div class="err-msg" id="formErr">Please fill in the required fields above.</div>
+      <div class="err-msg" id="netErr">Something went wrong sending your referral. Please try again — or email us at <a href="mailto:refer@bifmortgage.com" style="color:inherit;">refer@bifmortgage.com</a>.</div>
+
+      <button type="submit" class="submit" id="submitBtn">Send my referral</button>
+      <div class="fine">We'll reach out to your client quickly and keep you posted at the email you provided.</div>
+    </form>
+
+    <div class="success" id="successBox">
+      <div class="check">✓</div>
+      <h2>Referral received</h2>
+      <p>Thanks — your client is in great hands. A loan officer will reach out shortly, and we'll keep you in the loop at every step.</p>
+      <span class="again" id="againLink">Refer another client</span>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  Best Interest Financial · NMLS #2469842 · Powered by Clever Real Estate<br>
+  <a href="https://www.bifmortgage.com" style="color:var(--navy-2);font-weight:600;text-decoration:none;">bifmortgage.com</a>
+  &nbsp;·&nbsp;
+  <a href="mailto:refer@bifmortgage.com" style="color:var(--navy-2);font-weight:600;text-decoration:none;">refer@bifmortgage.com</a>
+</footer>
+
+<script>
+  // ── CONFIG ──────────────────────────────────────────────────────────────
+  // Paste the Zapier "Catch Hook" URL here before publishing.
+  const WEBHOOK_URL = "PASTE_ZAPIER_CATCH_HOOK_URL_HERE";
+  // ────────────────────────────────────────────────────────────────────────
+
+  const STATES = ["Alabama","Alaska","Arizona","Arkansas","California","Colorado",
+    "Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana",
+    "Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan",
+    "Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire",
+    "New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma",
+    "Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee",
+    "Texas","Utah","Vermont","Virginia","Washington","Washington D.C.","West Virginia",
+    "Wisconsin","Wyoming"];
+  const stateSel = document.getElementById("state");
+  STATES.forEach(s => {
+    const o = document.createElement("option");
+    o.textContent = s; o.value = s;
+    stateSel.appendChild(o);
+  });
+
+  // Buying-stage pills (single select, click again to clear)
+  let stage = "";
+  document.getElementById("stagePills").addEventListener("click", e => {
+    const p = e.target.closest(".pill");
+    if (!p) return;
+    const on = p.classList.contains("on");
+    document.querySelectorAll(".pill").forEach(x => x.classList.remove("on"));
+    stage = on ? "" : p.dataset.val;
+    if (!on) p.classList.add("on");
+  });
+
+  const $ = id => document.getElementById(id);
+  const form = $("refForm");
+
+  function markError(el, bad) { el.classList.toggle("error", bad); }
+
+  form.addEventListener("submit", async e => {
+    e.preventDefault();
+    $("formErr").classList.remove("show");
+    $("netErr").classList.remove("show");
+    $("contactErr").classList.remove("show");
+
+    const agentName  = $("agent_name").value.trim();
+    const agentEmail = $("agent_email").value.trim();
+    const clientName = $("client_name").value.trim();
+    const phone      = $("client_phone").value.trim();
+    const email      = $("client_email").value.trim();
+    const state      = stateSel.value;
+
+    let bad = false;
+    markError($("agent_name"),  !agentName);  bad = bad || !agentName;
+    markError($("agent_email"), !agentEmail || !/^\S+@\S+\.\S+$/.test(agentEmail)); bad = bad || !agentEmail || !/^\S+@\S+\.\S+$/.test(agentEmail);
+    markError($("client_name"), !clientName); bad = bad || !clientName;
+    markError(stateSel, !state);              bad = bad || !state;
+
+    const noContact = !phone && !email;
+    if (noContact) {
+      $("contactErr").classList.add("show");
+      markError($("client_phone"), true);
+      markError($("client_email"), true);
+      bad = true;
+    } else {
+      markError($("client_phone"), false);
+      markError($("client_email"), false);
+    }
+
+    if (bad) { $("formErr").classList.add("show"); return; }
+
+    const payload = {
+      source: "clever_agent_referral_form",
+      submitted_at: new Date().toISOString(),
+      agent_name: agentName,
+      agent_email: agentEmail,
+      client_name: clientName,
+      client_phone: phone,
+      client_email: email,
+      state: state,
+      buying_stage: stage,                     // "" if not selected
+      loan_officer: $("loan_officer").value,   // "" = no preference → lead queue
+      notes: $("notes").value.trim()
+    };
+
+    const btn = $("submitBtn");
+    btn.disabled = true; btn.textContent = "Sending…";
+
+    try {
+      if (WEBHOOK_URL.startsWith("PASTE_")) {
+        throw new Error("Webhook URL not configured");
+      }
+      const res = await fetch(WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      if (!res.ok) throw new Error("Bad response: " + res.status);
+      form.style.display = "none";
+      $("successBox").classList.add("show");
+    } catch (err) {
+      console.error(err);
+      $("netErr").classList.add("show");
+      btn.disabled = false; btn.textContent = "Send my referral";
+    }
+  });
+
+  $("againLink").addEventListener("click", () => {
+    form.reset();
+    stage = "";
+    document.querySelectorAll(".pill").forEach(x => x.classList.remove("on"));
+    form.style.display = "";
+    $("successBox").classList.remove("show");
+    const btn = $("submitBtn");
+    btn.disabled = false; btn.textContent = "Send my referral";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+</body>
+</html>
