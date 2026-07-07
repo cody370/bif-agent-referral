@@ -345,12 +345,13 @@
       if (WEBHOOK_URL.startsWith("PASTE_")) {
         throw new Error("Webhook URL not configured");
       }
-      const res = await fetch(WEBHOOK_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
-      if (!res.ok) throw new Error("Bad response: " + res.status);
+      const body = JSON.stringify(payload);
+      try {
+        const res = await fetch(WEBHOOK_URL, { method: "POST", body: body });
+        if (!res.ok) throw new Error("Bad response: " + res.status);
+      } catch (corsErr) {
+        await fetch(WEBHOOK_URL, { method: "POST", mode: "no-cors", body: body });
+      }
       form.style.display = "none";
       $("successBox").classList.add("show");
     } catch (err) {
