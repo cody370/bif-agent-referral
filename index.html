@@ -143,14 +143,15 @@
         <div class="sec-label">
           <div class="sec-num">1</div>
           <div class="sec-title">About you</div>
+          <div class="sec-hint">optional</div>
         </div>
         <div class="row">
           <div class="field">
-            <label for="agent_name">Your name <span class="req">*</span></label>
+            <label for="agent_name">Your name</label>
             <input id="agent_name" name="agent_name" type="text" autocomplete="name">
           </div>
           <div class="field">
-            <label for="agent_email">Your email <span class="req">*</span></label>
+            <label for="agent_email">Your email</label>
             <input id="agent_email" name="agent_email" type="email" autocomplete="email">
           </div>
         </div>
@@ -167,7 +168,7 @@
         </div>
         <div class="row">
           <div class="field">
-            <label for="client_phone">Client phone</label>
+            <label for="client_phone">Client phone <span class="req">*</span></label>
             <input id="client_phone" name="client_phone" type="tel" inputmode="tel">
           </div>
           <div class="field">
@@ -175,7 +176,7 @@
             <input id="client_email" name="client_email" type="email">
           </div>
         </div>
-        <div class="err-msg" id="contactErr">Please include at least one way to reach the client — phone or email.</div>
+        <div class="err-msg" id="contactErr">Please include the client's phone number.</div>
         <div class="field">
           <label for="state">State they're buying in <span class="req">*</span></label>
           <select id="state" name="state">
@@ -241,7 +242,7 @@
       <div class="err-msg" id="netErr">Something went wrong sending your referral. Please try again — or email us at <a href="mailto:refer@bifmortgage.com" style="color:inherit;">refer@bifmortgage.com</a>.</div>
 
       <button type="submit" class="submit" id="submitBtn">Send my referral</button>
-      <div class="fine">We'll reach out to your client quickly and keep you posted at the email you provided.</div>
+      <div class="fine">We'll reach out to your client quickly — and if you leave your email, we'll keep you posted too.</div>
     </form>
 
     <div class="success" id="successBox">
@@ -306,21 +307,20 @@
     const state      = stateSel.value;
 
     let bad = false;
-    markError($("agent_name"),  !agentName);  bad = bad || !agentName;
-    markError($("agent_email"), !agentEmail || !/^\S+@\S+\.\S+$/.test(agentEmail)); bad = bad || !agentEmail || !/^\S+@\S+\.\S+$/.test(agentEmail);
+    markError($("agent_name"), false);
+    const agentEmailBad = agentEmail && !/^\S+@\S+\.\S+$/.test(agentEmail);
+    markError($("agent_email"), agentEmailBad); bad = bad || agentEmailBad;
     markError($("client_name"), !clientName); bad = bad || !clientName;
     markError(stateSel, !state);              bad = bad || !state;
 
-    const noContact = !phone && !email;
-    if (noContact) {
+    if (!phone) {
       $("contactErr").classList.add("show");
       markError($("client_phone"), true);
-      markError($("client_email"), true);
       bad = true;
     } else {
       markError($("client_phone"), false);
-      markError($("client_email"), false);
     }
+    markError($("client_email"), false);
 
     if (bad) { $("formErr").classList.add("show"); return; }
 
